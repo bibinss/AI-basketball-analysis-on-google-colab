@@ -29,7 +29,7 @@ def getVideoStream(video_path):
     hasFrame, fr = cap.read()
     fourcc = cv2.VideoWriter_fourcc(*'mp4v')
     out_shape = fr.shape
-    vid_writer = cv2.VideoWriter('./static/uploads/out_res.mp4', fourcc, 10, (out_shape[1],out_shape[0]))
+    vid_writer = cv2.VideoWriter('./static/uploads/out_res.mp4', fourcc, 10, (out_shape[1],out_shape[0]*2))
     fig = plt.figure()
     #objects to store detection status
     previous = {
@@ -75,8 +75,9 @@ def getVideoStream(video_path):
             detection, trace = detect_shot(img, trace, width, height, sess, image_tensor, boxes, scores, classes,
                                         num_detections, previous, during_shooting, shot_result, fig, datum, opWrapper, shooting_pose)
 
+            out_frame = detection
             detection = cv2.resize(detection, (0, 0), fx=0.83, fy=0.83)
-            out_frame = cv2.resize(detection, (0, 0), fx=0.5, fy=0.5)
+            #out_frame = cv2.resize(detection, (0, 0), fx=0.5, fy=0.5)
             vid_writer.write(out_frame)
             frame = cv2.imencode('.jpg', detection)[1].tobytes()
             result = (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
