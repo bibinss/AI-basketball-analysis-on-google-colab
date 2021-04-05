@@ -76,7 +76,7 @@ def getVideoStream(video_path):
                                         num_detections, previous, during_shooting, shot_result, fig, datum, opWrapper, shooting_pose)
 
             detection = cv2.resize(detection, (0, 0), fx=0.83, fy=0.83)
-            out_frame = cv2.resize(detection, (out_shape[1], out_shape[0]), interpolation = cv2.INTER_NEAREST)
+            out_frame = cv2.resize(detection, (0, 0), fx=0.5, fy=0.5)
             vid_writer.write(out_frame)
             frame = cv2.imencode('.jpg', detection)[1].tobytes()
             result = (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
