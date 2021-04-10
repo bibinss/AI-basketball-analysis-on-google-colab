@@ -13,6 +13,8 @@ import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 from .utils import detect_shot, detect_image, detect_API, tensorflow_init, openpose_init
 from statistics import mean
+import ntpath
+
 tf.disable_v2_behavior()
 
 def getVideoStream(video_path):
@@ -29,7 +31,8 @@ def getVideoStream(video_path):
     hasFrame, fr = cap.read()
     fourcc = cv2.VideoWriter_fourcc(*'mp4v')
     out_shape = fr.shape
-    vid_writer = cv2.VideoWriter('./static/uploads/out_res.mp4', fourcc, 10, (out_shape[1]*2,out_shape[0]))
+    file_name = ntpath.basename(video_path)
+    vid_writer = cv2.VideoWriter('./static/uploads/out_res_{}.mp4'.format(file_name), fourcc, 10, (out_shape[1]*2,out_shape[0]))
     #vid_writer = cv2.VideoWriter('./static/uploads/out_res.mp4', fourcc, 10, (out_shape[1],out_shape[0]*2))
     print("height {} width {}".format(out_shape[1]*2, out_shape[0]))
     fig = plt.figure()
