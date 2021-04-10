@@ -29,9 +29,9 @@ def getVideoStream(video_path):
     hasFrame, fr = cap.read()
     fourcc = cv2.VideoWriter_fourcc(*'mp4v')
     out_shape = fr.shape
-    vid_writer = cv2.VideoWriter('./static/uploads/out_res.mp4', fourcc, 10, (3840,1080))
+    vid_writer = cv2.VideoWriter('./static/uploads/out_res.mp4', fourcc, 10, (out_shape[1]*2,out_shape[0]))
     #vid_writer = cv2.VideoWriter('./static/uploads/out_res.mp4', fourcc, 10, (out_shape[1],out_shape[0]*2))
-    print("height {} width {}".format(out_shape[1], out_shape[0]*2))
+    print("height {} width {}".format(out_shape[1]*2, out_shape[0]))
     fig = plt.figure()
     #objects to store detection status
     previous = {
