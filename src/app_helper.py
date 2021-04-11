@@ -32,7 +32,7 @@ def getVideoStream(video_path):
     fourcc = cv2.VideoWriter_fourcc(*'mp4v')
     out_shape = fr.shape
     file_name = ntpath.basename(video_path)
-    vid_writer = cv2.VideoWriter('./static/uploads/out_res_{}.mp4'.format(file_name), fourcc, 7, (out_shape[1]*2,out_shape[0]))
+    vid_writer = cv2.VideoWriter('./static/uploads/out_res_{}.mp4'.format(file_name), fourcc, 5, (out_shape[1]*2,out_shape[0]))
     #vid_writer = cv2.VideoWriter('./static/uploads/out_res.mp4', fourcc, 10, (out_shape[1],out_shape[0]*2))
     print("height {} width {}".format(out_shape[1]*2, out_shape[0]))
     fig = plt.figure()
